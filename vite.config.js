@@ -8,4 +8,9 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    server: {
+        origin: `http://localhost:${process.env.VITE_PORT}`,
+        host: '0.0.0.0',
+        port: process.env.VITE_PORT,
+    },
 });

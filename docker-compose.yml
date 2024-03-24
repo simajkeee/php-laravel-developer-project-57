@@ -7,6 +7,8 @@ services:
                 uid: 1000
             context: ./
             dockerfile: Dockerfile.dev
+        environment:
+            VITE_PORT: ${VITE_SERVER_PORT}
         image: hexlet-blog
         container_name: hexlet-blog-app
         restart: unless-stopped
@@ -15,6 +17,8 @@ services:
             - ./:/var/www
         networks:
             - hexlet_blog
+        ports:
+            - ${VITE_SERVER_PORT}:${VITE_SERVER_PORT} # both from .env
     db:
         image: postgres:16-alpine
         container_name: hexlet-blog-db
