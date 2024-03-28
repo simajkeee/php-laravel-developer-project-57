@@ -5,15 +5,29 @@
                 <span class="self-center text-xl font-semibold whitespace-nowrap">Менеджер задач</span>
             </a>
 
-            <div class="flex items-center lg:order-2">
-                <a href="https://php-task-manager-ru.hexlet.app/login"
+            <div x-data class="flex items-center lg:order-2">
+                @guest
+                <a href="{{ route('login') }}"
                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                     Вход
                 </a>
-                <a href="#"
+                <a href="{{ route('register') }}"
                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2">
                     Регистрация
                 </a>
+                @endguest
+
+                @auth
+                    <a href="#"
+                       x-on:click.prevent="document.getElementById('logout-form').submit()"
+                       class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2"
+                    >
+                        Logout
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                @endauth
             </div>
 
             <div class="items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1">

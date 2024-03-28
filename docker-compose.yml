@@ -9,6 +9,7 @@ services:
             dockerfile: Dockerfile.dev
         environment:
             VITE_PORT: ${VITE_SERVER_PORT}
+            PHP_IDE_CONFIG: serverName=hexletBlog
         image: hexlet-blog
         container_name: hexlet-blog-app
         restart: unless-stopped
@@ -19,6 +20,8 @@ services:
             - hexlet_blog
         ports:
             - ${VITE_SERVER_PORT}:${VITE_SERVER_PORT} # both from .env
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
     db:
         image: postgres:16-alpine
         container_name: hexlet-blog-db
