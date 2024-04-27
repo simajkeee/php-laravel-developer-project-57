@@ -12,7 +12,7 @@ class TaskStatusController extends Controller
      */
     public function index()
     {
-        return view('task-status.index', ['taskStatuses' => TaskStatus::all()]);
+        return view('task_statuses.index', ['taskStatuses' => TaskStatus::all()]);
     }
 
     /**
@@ -20,7 +20,7 @@ class TaskStatusController extends Controller
      */
     public function create()
     {
-        //
+        return view('task_statuses.create');
     }
 
     /**
@@ -28,7 +28,13 @@ class TaskStatusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|min:3|unique:task_statuses,name',
+        ]);
+
+        TaskStatus::create($validated);
+
+        return redirect()->route('task_statuses.index');
     }
 
     /**
