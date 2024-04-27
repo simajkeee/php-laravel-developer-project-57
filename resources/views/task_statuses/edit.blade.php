@@ -1,11 +1,11 @@
 <x-app-layout>
-    {{ html()->form()->route('task_statuses.store')->open() }}
+    {{ html()->modelForm($taskStatus, 'PUT')->route('task_statuses.update', $taskStatus->id)->open() }}
     <div class="mb-5">
         <x-input-label for="status_name" value="Название статуса"/>
 
         <x-text-input id="status_name"
                       class="block mt-1 w-full"
-                      :value="old('name')"
+                      :value="old('name') ?: $taskStatus->name"
                       type="text"
                       name="name"
                       required/>
@@ -16,7 +16,7 @@
     </div>
 
     <div>
-        {{ html()->submit('Создать статус')->attribute('class', 'submit-button') }}
+        {{ html()->submit('Обновить статус')->attribute('class', 'submit-button') }}
     </div>
-    {{ html()->form()->close() }}
+    {{ html()->closeModelForm() }}
 </x-app-layout>

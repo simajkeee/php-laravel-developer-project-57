@@ -34,7 +34,9 @@ class TaskStatusController extends Controller
 
         TaskStatus::create($validated);
 
-        return redirect()->route('task_statuses.index');
+        return redirect()
+            ->route('task_statuses.index')
+            ->with('success', 'Task Status Created Successfully');
     }
 
     /**
@@ -48,17 +50,26 @@ class TaskStatusController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(TaskStatus $taskStatus)
     {
-        //
+        return view('task_statuses.edit', ['taskStatus' => $taskStatus]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, TaskStatus $taskStatus)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|min:3|unique:task_statuses,name,'.$taskStatus->id,
+        ]);
+
+        $taskStatus->update($validated);
+
+
+        return redirect()
+            ->route('task_statuses.index')
+            ->with('success', 'Task Status Updated Successfully');
     }
 
     /**
