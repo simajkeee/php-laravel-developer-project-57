@@ -5,7 +5,7 @@
     <ul>
         @foreach($taskStatuses as $ts)
             <li>
-                {{ $ts->name }} <a class="a-link" href="{{ route('task_statuses.edit', $ts->id) }}">Edit</a>
+                {{ $ts->name }} @auth <a class="a-link" href="{{ route('task_statuses.edit', $ts->id) }}">Edit</a> @endauth
             </li>
         @endforeach
     </ul>
