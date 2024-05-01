@@ -14,10 +14,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        if (App::environment() === 'production') {
-            return;
-        }
-
         DB::transaction(static function () {
             if (config('seeders.truncate.task_statuses')) {
                 DB::table('task_statuses')->truncate();

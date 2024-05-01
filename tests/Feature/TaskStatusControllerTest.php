@@ -56,6 +56,5 @@ class TaskStatusControllerTest extends TestCase
         $responseIndex = $this->get($routeIndex);
         $responseIndex->assertOk();
         $responseIndex->assertSeeText($updateStatus);
-
     }
 }
