@@ -80,8 +80,12 @@ class TaskStatusController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(int $id)
     {
-        //
+        TaskStatus::destroy($id);
+
+        return redirect()
+            ->route('task_statuses.index')
+            ->with('success', 'Task Status Deleted Successfully');
     }
 }
