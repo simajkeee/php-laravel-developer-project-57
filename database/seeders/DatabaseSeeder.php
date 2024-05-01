@@ -15,10 +15,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         DB::transaction(static function () {
-            if (config('seeders.truncate.task_statuses')) {
-                DB::table('task_statuses')->truncate();
-            }
-
+            DB::table('task_statuses')->truncate();
             TaskStatus::factory()->createMany([
                 ['name' => 'New'],
                 ['name' => 'In progress'],
